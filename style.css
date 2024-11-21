@@ -182,21 +182,6 @@ section {
   white-space: nowrap;
    
 }
-.section__text__p2 {
-  white-space: nowrap;
-  border-right: 3px solid #0073e6;
-  overflow: hidden;
-  width: 0;
-  animation: typing 3s steps(30) forwards, blink 0.7s infinite step-end alternate;
-}
-@keyframes typing {
-  from { width: 0; }
-  to { width: 16ch; }
-}
-
-@keyframes blink {
-  50% { border-color: transparent; }
-}
 
 
 .section__text__p1 {
