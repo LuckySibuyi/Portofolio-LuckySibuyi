@@ -196,7 +196,6 @@ section {
 .title {
   font-size: 3rem;
   text-align: center;
-  animation: typing 3s steps(30) forwards, blink 0.7s infinite step-end alternate;
 }
 
 #socials-container {
