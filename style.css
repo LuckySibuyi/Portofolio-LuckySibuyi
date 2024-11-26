@@ -320,7 +320,7 @@ section {
 
 #experience {
   position: relative;
-  height: 70vh;
+  height: 80vh;
   
 }
 
@@ -361,7 +361,7 @@ article .icon {
 
 #projects {
   position: relative;
-  height: 70vh;
+
   
 }
 
@@ -372,7 +372,7 @@ article .icon {
 
 .project-img {
   border-radius: 2rem;
-  width: 90%;
+  width: 80%;
   height: 90%;
 }
 
