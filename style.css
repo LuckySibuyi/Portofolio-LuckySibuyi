@@ -37,6 +37,7 @@ nav {
   justify-content: space-around;
   align-items: center;
   height: 17vh;
+  background-color: rgb(231, 231, 231);
 }
 
 .nav-links {
@@ -161,7 +162,7 @@ section {
   display: flex;
   justify-content: center;
   gap: 5rem;
-  height: 60vh;
+  height: 96vh;
 }
 
 .section__pic-container {
@@ -263,6 +264,7 @@ section {
 
 #about {
   position: relative;
+  height: 96vh;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(175, 173, 173, 0.1);
 }
@@ -318,6 +320,7 @@ section {
 
 #experience {
   position: relative;
+  height: 60vh;
   
 }
 
