@@ -38,6 +38,8 @@ nav {
   align-items: center;
   height: 17vh;
   background-color: rgb(231, 231, 231);
+  position: fixed;
+  width: 100%;
 }
 
 .nav-links {
@@ -58,6 +60,9 @@ a:hover {
   text-underline-offset: 1rem;
   text-decoration-color: rgb(181, 181, 181);
 }
+.logo {
+  font-size: 2rem;
+}
 
 .logo:hover {
   cursor: default;
@@ -67,11 +72,13 @@ a:hover {
 
 #hamburger-nav {
   display: none;
+  position: relative;
 }
 
 .hamburger-menu {
   position: relative;
   display: inline-block;
+  
 }
 
 .hamburger-icon {
