@@ -5,79 +5,98 @@ function toggleMenu() {
   icon.classList.toggle("open");
 }
 
-// Chatbot logic
-function chatbot(input) {
-  input = input.toLowerCase();
-  const responses = {
-    hello: "Hello, nice to meet you!",
-    hi: "Hi there!",
-    "how are you": "I'm doing fine, thank you for asking.",
-    "what is your name": "My name is Jarvis, I'm a chatbot.",
-    "what can you do": "I can chat with you and answer some simple questions.",
-    "tell me a joke": "Why did the chicken go to the seance? To get to the other side.",
+document.addEventListener("DOMContentLoaded", () => {
+  const toggleButton = document.getElementById("toggleButton");
+  const chatbotContainer = document.getElementById("chatbotContainer");
+  const closeButton = document.getElementById("closeButton");
+  const chatBox = document.getElementById("chat");
+  const inputField = document.getElementById("input");
+  const sendMessageButton = document.getElementById("button");
+  const refreshButton = document.querySelector(".refBtn");
+  const inputContainer = document.querySelector(".input-container");
+
+  const messages = {
+    init: ["Hello! 👋", "I am your assistant.", "How can I help you today?"],
+    options: ["Movies 🎥", "News 📰", "Shopping 🛍️", "Music 🎵", "Others"],
   };
 
-  for (const key in responses) {
-    if (input.includes(key)) {
-      return responses[key];
+  // Toggle Chatbot
+  toggleButton.addEventListener("click", () => {
+    chatbotContainer.style.display = "flex";
+    toggleButton.style.display = "none";
+    initializeChat();
+  });
+
+  closeButton.addEventListener("click", () => {
+    chatbotContainer.style.display = "none";
+    toggleButton.style.display = "block";
+  });
+
+  refreshButton.addEventListener("click", () => {
+    initializeChat();
+    inputContainer.style.display = "none"; // Reset input visibility
+  });
+
+  // Initialize Chat
+  function initializeChat() {
+    chatBox.innerHTML = ""; // Clear chat
+    inputContainer.style.display = "none"; // Hide input by default
+    messages.init.forEach((message, index) => {
+      setTimeout(() => addMessage("bot", message), index * 500);
+    });
+    setTimeout(() => showOptions(messages.options), messages.init.length * 500);
+  }
+
+  // Add Message
+  function addMessage(sender, text) {
+    const messageElement = document.createElement("div");
+    messageElement.className = sender === "bot" ? "bot-message" : "user-message";
+    messageElement.innerHTML = text;
+    chatBox.appendChild(messageElement);
+    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the latest message
+  }
+
+  // Show Options
+  function showOptions(options) {
+    options.forEach((option) => {
+      const optionElement = document.createElement("button");
+      optionElement.className = "option";
+      optionElement.innerHTML = option;
+      optionElement.addEventListener("click", () => handleOption(option));
+      chatBox.appendChild(optionElement);
+    });
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  // Handle Option Click
+  function handleOption(option) {
+    addMessage("user", option); // Show user response
+    clearOptions();
+
+    if (option.toLowerCase() === "others") {
+      inputContainer.style.display = "flex"; // Show input box for "Others"
+    } else {
+      inputContainer.style.display = "none"; // Hide input for other options
+      setTimeout(() => addMessage("bot", `You selected: ${option}`), 500);
     }
   }
 
-  return "Sorry, I don't understand that. Please try something else.";
-}
-
-// Display user message
-function displayUserMessage(message) {
-  const chat = document.getElementById("chat");
-  const userMessage = `<div class="message user">
-    <div class="avatar" style="background-image: url('avatar.jpg');"></div>
-    <div class="text">${message}</div>
-  </div>`;
-  chat.innerHTML += userMessage;
-  chat.scrollTop = chat.scrollHeight;
-}
-
-// Display bot message
-function displayBotMessage(message) {
-  const chat = document.getElementById("chat");
-  const botMessage = `<div class="message bot">
-    <div class="avatar" style="background-image: url('bot.jpg');"></div>  
-    <div class="text">${message}</div>
-  </div>`;
-  chat.innerHTML += botMessage;
-  chat.scrollTop = chat.scrollHeight;
-}
-
-// Handle send message
-function sendMessage() {
-  const input = document.getElementById("input").value;
-  if (input) {
-    displayUserMessage(input);
-    const output = chatbot(input);
-    setTimeout(() => displayBotMessage(output), 1000);
-    document.getElementById("input").value = "";
+  function clearOptions() {
+    document.querySelectorAll(".option").forEach((el) => el.remove());
   }
-}
 
-// Event listeners
-document.getElementById("button").addEventListener("click", sendMessage);
-document.getElementById("input").addEventListener("keypress", (event) => {
-  if (event.key === "Enter") {
-    sendMessage();
+  // Send Message
+  sendMessageButton.addEventListener("click", sendMessage);
+  inputField.addEventListener("keypress", (event) => {
+    if (event.key === "Enter") sendMessage();
+  });
+
+  function sendMessage() {
+    const userInput = inputField.value.trim();
+    if (!userInput) return;
+    addMessage("user", userInput);
+    inputField.value = ""; // Clear input field
+    // Simulate bot response
+    setTimeout(() => addMessage("bot", "I'm here to assist you!"), 1000);
   }
-});
-
-// Toggle chatbot visibility
-const toggleButton = document.getElementById("toggleButton");
-const chatbotContainer = document.getElementById("chatbotContainer");
-const closeButton = document.getElementById("closeButton");
-
-toggleButton.addEventListener("click", () => {
-  chatbotContainer.style.display = "flex";
-  toggleButton.style.display = "none";
-});
-
-closeButton.addEventListener("click", () => {
-  chatbotContainer.style.display = "none";
-  toggleButton.style.display = "block";
 });

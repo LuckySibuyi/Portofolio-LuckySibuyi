@@ -641,7 +641,9 @@ footer p {
   color: indianred;
   font-size: 20px;
   cursor: pointer;
-  margin: 7px;
+  top: 68px;
+  left: 80px;
+  position: absolute;
 }
 .refBtn :hover{
   background: rgb(173, 135, 135);
