@@ -290,7 +290,30 @@
         </div>
       </div>
     </section>
-    
+    <!-- Chatbot Toggle Button -->
+  <button class="toggle-button" id="toggleButton"><i class="fa-solid fa-comment-dots"></i></button>
+
+  <!-- Chatbot Container -->
+  <div class="chatbot-container" id="chatbotContainer">
+    <div class="chat-header">
+      <div class="title">
+        <img src="bot.jpg" alt="avatar" id="avatar">
+        <div>
+            <span style="color:lawngreen">online</span>
+        </div>
+    </div>
+      <button class="close-button" id="closeButton">&times;</button>
+    </div>
+    <div class="container">
+      <div class="chat" id="chat"></div>
+      <div class="input-container">
+        
+        <button class="refBtn"><i class="fa fa-refresh" onclick="initChat()"></i></button>
+        <input type="text" class="input" id="input" placeholder="Type your message here...." />
+        <button class="button" id="button"><i class="fa-brands fa-telegram"></i></button>
+      </div>
+    </div>
+  </div>
     <footer>
       <nav>
         <div class="nav-links-container">
