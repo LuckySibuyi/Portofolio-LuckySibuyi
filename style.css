@@ -400,7 +400,7 @@ article .icon {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 60vh;
+  height: 80vh;
 }
 
 .contact-info-upper-container {
@@ -437,12 +437,14 @@ article .icon {
 /* FOOTER SECTION */
 
 footer {
-  height: 20vh;
-  margin: 0 1rem;
+  margin: 1rem;
 }
 
 footer p {
   text-align: center;
+}
+.top {
+justify-content: center;
 }
 
 /* chatbot SECTION */
@@ -579,21 +581,48 @@ footer p {
  
 }
 
-.text {
-  max-width: 70%;
+.bot-message, .user-message {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
   padding: 10px;
-  border-radius: 10px;
-  font-size: 14px;
+  border-radius: 8px;
+  background-color: rgb(81, 131, 155);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.user .text {
-  background: #007BFF;
-  color: white;
+/* User messages styling */
+.user-message {
+  justify-content: flex-end; 
+  background-color: rgba(104, 149, 216, 0.8); 
+  color: rgb(255, 255, 255);
+  text-align: right;
+  border-radius: 12px 12px 0 12px; 
 }
 
-.bot .text {
-  background: #ddd;
+.user-message .message-icon {
+  margin-left: 10px; 
+}
+
+
+.bot-message {
+  justify-content: flex-start;
+  background-color: rgba(241, 241, 241, 0.6);
   color: #333;
+  text-align: left;
+  border-radius: 12px 12px 12px 0;
+}
+
+.bot-message .message-icon {
+  margin-right: 10px;
+  
+}
+.bot-message span, .user-message span {
+  max-width: 80%;
+  word-wrap: break-word;
+  padding: 10px;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 /* Input Section */
@@ -641,7 +670,7 @@ footer p {
   color: indianred;
   font-size: 20px;
   cursor: pointer;
-  top: 68px;
+  top: 67px;
   left: 80px;
   position: absolute;
 }

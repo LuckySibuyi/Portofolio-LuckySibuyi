@@ -51,7 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function addMessage(sender, text) {
     const messageElement = document.createElement("div");
     messageElement.className = sender === "bot" ? "bot-message" : "user-message";
-    messageElement.innerHTML = text;
+    
+    const icon = sender === "bot" 
+      ? `<img src="bot.jpg" alt="bot-icon" class="avatar">` 
+      : `<img src="avatar.jpg" alt="user-icon" class="avatar">`;
+
+    messageElement.innerHTML = `<span>${text}</span> ${icon} `;
     chatBox.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the latest message
   }
@@ -97,6 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
     addMessage("user", userInput);
     inputField.value = ""; // Clear input field
     // Simulate bot response
-    setTimeout(() => addMessage("bot", "I'm here to assist you!"), 1000);
+    setTimeout(() => addMessage("bot", "Message sent to Lucky Sibuyi!"), 1000);
   }
 });
