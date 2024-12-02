@@ -639,11 +639,13 @@ footer p {
   border: none;
   border-radius: 50%;
   color: indianred;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
+  margin: 7px;
 }
 .refBtn :hover{
   background: rgb(173, 135, 135);
+  
 }
 @media (max-width: 600px) {
   .toggle-button {
