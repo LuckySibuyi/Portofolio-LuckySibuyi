@@ -15,6 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const refreshButton = document.querySelector(".refBtn");
   const inputContainer = document.querySelector(".input-container");
 
+  let userName = "";
+  let userEmail = "";
+  let userMessage = "";
+  let currentStep = "name"; // Track the current step: "name", "email", or "message"
+
   const messages = {
     init: ["Hello<br />I am Jarvis<span class='emoji'>&#129302;</span>your assistant.", "How can I help you today?"],
     options: ["Movies 🎥", "News 📰", "Shopping 🛍️", "Music 🎵", "Others"],
@@ -34,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   refreshButton.addEventListener("click", () => {
     initializeChat();
-    inputContainer.style.display = "none"; 
+    inputContainer.style.display = "none";
   });
 
   // Initialize Chat
@@ -51,11 +56,11 @@ document.addEventListener("DOMContentLoaded", () => {
   function addMessage(sender, text) {
     const messageElement = document.createElement("div");
     messageElement.className = sender === "bot" ? "bot-message" : "user-message";
-  
+
     const icon = sender === "bot" 
       ? `<img src="bot.jpg" alt="bot-icon" class="avatar">` 
       : `<img src="avatar.jpg" alt="user-icon" class="avatar">`;
-  
+
     if (sender === "bot") {
       // Bot icon before the text
       messageElement.innerHTML = `${icon} <span>${text}</span>`;
@@ -63,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // User icon after the text
       messageElement.innerHTML = `<span>${text}</span> ${icon}`;
     }
-  
+
     chatBox.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;
   }
@@ -86,74 +91,49 @@ document.addEventListener("DOMContentLoaded", () => {
     clearOptions();
 
     if (option.toLowerCase() === "others") {
-      // Ask for name if "Others" is selected
-      inputContainer.style.display = "flex"; 
+      inputContainer.style.display = "flex";
       addMessage("bot", "Please provide your name:");
       inputField.placeholder = "Enter your name here";
       inputField.focus();
-      inputField.removeEventListener("keypress", sendMessage);
-      inputField.addEventListener("keypress", collectName);
+      inputField.removeEventListener("keypress", handleInput);
+      inputField.addEventListener("keypress", handleInput);
     } else {
       inputContainer.style.display = "none"; // Hide input for other options
       setTimeout(() => addMessage("bot", `You selected: ${option}`), 500);
     }
   }
 
-  // Collect Name
-  function collectName(event) {
+  // Handle Input
+  function handleInput(event) {
     if (event.key === "Enter" && inputField.value.trim()) {
-      const name = inputField.value.trim();
-      addMessage("user", name);
-      inputField.value = "";
-      addMessage("bot", "Thank you! Now, please provide your email address:");
-      inputField.placeholder = "Enter your email here";
-      inputField.removeEventListener("keypress", collectName);
-      inputField.addEventListener("keypress", collectEmail);
-    }
-  }
+      const userInput = inputField.value.trim();
+      inputField.value = ""; // Clear input field
 
-  // Collect Email
-  function collectEmail(event) {
-    if (event.key === "Enter" && inputField.value.trim()) {
-      const email = inputField.value.trim();
-      addMessage("user", email);
-      inputField.value = "";
-      addMessage("bot", "Great! Finally, please type your message:");
-      inputField.placeholder = "Enter your message here";
-      inputField.removeEventListener("keypress", collectEmail);
-      inputField.addEventListener("keypress", collectMessage);
-    }
-  }
-
-  // Collect Message
-  function collectMessage(event) {
-    if (event.key === "Enter" && inputField.value.trim()) {
-      const message = inputField.value.trim();
-      addMessage("user", message);
-      inputField.value = "";
-      addMessage("bot", "Thank you for your message! We'll get back to you soon.");
-      inputContainer.style.display = "none"; // Hide input container
-      inputField.removeEventListener("keypress", collectMessage);
-      // Optionally, send the collected data somewhere via AJAX or similar.
+      if (currentStep === "name") {
+        userName = userInput;
+        addMessage("user", userName);
+        addMessage("bot", "Thank you! Now, please provide your email address:");
+        inputField.placeholder = "Enter your email here";
+        currentStep = "email";
+      } else if (currentStep === "email") {
+        userEmail = userInput;
+        addMessage("user", userEmail);
+        addMessage("bot", "Great! Finally, please type your message:");
+        inputField.placeholder = "Enter your message here";
+        currentStep = "message";
+      } else if (currentStep === "message") {
+        userMessage = userInput;
+        addMessage("user", userMessage);
+        addMessage("bot", `Thank you, ${userName}! We've received your message and will get back to you at ${userEmail} soon.`);
+        inputContainer.style.display = "none";
+        currentStep = "name";
+        setTimeout(() => addMessage("bot", "Would you like to see the options again?"), 500);
+        setTimeout(() => showOptions(["Show Options"]), 1000);
+      }
     }
   }
 
   function clearOptions() {
     document.querySelectorAll(".option").forEach((el) => el.remove());
-  }
-
-  // Send Message
-  sendMessageButton.addEventListener("click", sendMessage);
-  inputField.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") sendMessage();
-  });
-
-  function sendMessage() {
-    const userInput = inputField.value.trim();
-    if (!userInput) return;
-    addMessage("user", userInput);
-    inputField.value = ""; // Clear input field
-    // Simulate bot response
-    setTimeout(() => addMessage("bot", "Message sent to Lucky Sibuyi!"), 1000);
   }
 });
