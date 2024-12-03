@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputContainer = document.querySelector(".input-container");
 
   const messages = {
-    init: ["Hello! 👋", "I am your assistant.", "How can I help you today?"],
+    init: ["Hello<br />I am Jarvis<span class='emoji'>&#129302;</span>your assistant.", "How can I help you today?"],
     options: ["Movies 🎥", "News 📰", "Shopping 🛍️", "Music 🎵", "Others"],
   };
 
@@ -34,13 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   refreshButton.addEventListener("click", () => {
     initializeChat();
-    inputContainer.style.display = "none"; // Reset input visibility
+    inputContainer.style.display = "none"; 
   });
 
   // Initialize Chat
   function initializeChat() {
-    chatBox.innerHTML = ""; // Clear chat
-    inputContainer.style.display = "none"; // Hide input by default
+    chatBox.innerHTML = "";
+    inputContainer.style.display = "none";
     messages.init.forEach((message, index) => {
       setTimeout(() => addMessage("bot", message), index * 500);
     });
@@ -51,14 +51,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function addMessage(sender, text) {
     const messageElement = document.createElement("div");
     messageElement.className = sender === "bot" ? "bot-message" : "user-message";
-    
+  
     const icon = sender === "bot" 
       ? `<img src="bot.jpg" alt="bot-icon" class="avatar">` 
       : `<img src="avatar.jpg" alt="user-icon" class="avatar">`;
-
-    messageElement.innerHTML = `<span>${text}</span> ${icon} `;
+  
+    if (sender === "bot") {
+      // Bot icon before the text
+      messageElement.innerHTML = `${icon} <span>${text}</span>`;
+    } else {
+      // User icon after the text
+      messageElement.innerHTML = `<span>${text}</span> ${icon}`;
+    }
+  
     chatBox.appendChild(messageElement);
-    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the latest message
+    chatBox.scrollTop = chatBox.scrollHeight;
   }
 
   // Show Options
@@ -79,10 +86,55 @@ document.addEventListener("DOMContentLoaded", () => {
     clearOptions();
 
     if (option.toLowerCase() === "others") {
-      inputContainer.style.display = "flex"; // Show input box for "Others"
+      // Ask for name if "Others" is selected
+      inputContainer.style.display = "flex"; 
+      addMessage("bot", "Please provide your name:");
+      inputField.placeholder = "Enter your name here";
+      inputField.focus();
+      inputField.removeEventListener("keypress", sendMessage);
+      inputField.addEventListener("keypress", collectName);
     } else {
       inputContainer.style.display = "none"; // Hide input for other options
       setTimeout(() => addMessage("bot", `You selected: ${option}`), 500);
+    }
+  }
+
+  // Collect Name
+  function collectName(event) {
+    if (event.key === "Enter" && inputField.value.trim()) {
+      const name = inputField.value.trim();
+      addMessage("user", name);
+      inputField.value = "";
+      addMessage("bot", "Thank you! Now, please provide your email address:");
+      inputField.placeholder = "Enter your email here";
+      inputField.removeEventListener("keypress", collectName);
+      inputField.addEventListener("keypress", collectEmail);
+    }
+  }
+
+  // Collect Email
+  function collectEmail(event) {
+    if (event.key === "Enter" && inputField.value.trim()) {
+      const email = inputField.value.trim();
+      addMessage("user", email);
+      inputField.value = "";
+      addMessage("bot", "Great! Finally, please type your message:");
+      inputField.placeholder = "Enter your message here";
+      inputField.removeEventListener("keypress", collectEmail);
+      inputField.addEventListener("keypress", collectMessage);
+    }
+  }
+
+  // Collect Message
+  function collectMessage(event) {
+    if (event.key === "Enter" && inputField.value.trim()) {
+      const message = inputField.value.trim();
+      addMessage("user", message);
+      inputField.value = "";
+      addMessage("bot", "Thank you for your message! We'll get back to you soon.");
+      inputContainer.style.display = "none"; // Hide input container
+      inputField.removeEventListener("keypress", collectMessage);
+      // Optionally, send the collected data somewhere via AJAX or similar.
     }
   }
 

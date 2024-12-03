@@ -37,7 +37,7 @@ nav {
   justify-content: space-around;
   align-items: center;
   height: 17vh;
-  background-color: rgb(231, 231, 231);
+  background-color: rgba(231, 231, 231,0.95);
   position: fixed;
   width: 100%;
   z-index: 1000;
@@ -170,7 +170,7 @@ section {
   display: flex;
   justify-content: center;
   gap: 5rem;
-  height: 96vh;
+  height: 100vh;
 }
 
 .section__pic-container {
@@ -328,7 +328,7 @@ section {
 
 #experience {
   position: relative;
-  height: 80vh;
+  height: 50vh;
   
 }
 
@@ -438,14 +438,18 @@ article .icon {
 
 footer {
   margin: 1rem;
-}
-
-footer p {
   text-align: center;
 }
 .top {
-justify-content: center;
+  display: flex;            /* Use flexbox for layout */
+  justify-content: center;  /* Centers content horizontally */
+  align-items: center; 
+  color: rgb(71, 64, 64);
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 26px;
 }
+
 
 /* chatbot SECTION */
 .Chatbot-main {
@@ -571,15 +575,6 @@ justify-content: center;
   font-size: 18px;
 }
 
-.user .avatar {
-  order: 2;
-
-}
-
-.bot .avatar {
-  order: 1;
- 
-}
 
 .bot-message, .user-message {
   display: flex;
@@ -597,7 +592,7 @@ justify-content: center;
   background-color: rgba(104, 149, 216, 0.8); 
   color: rgb(255, 255, 255);
   text-align: right;
-  border-radius: 12px 12px 0 12px; 
+  border-radius: 12px 0;
 }
 
 .user-message .message-icon {
@@ -607,7 +602,7 @@ justify-content: center;
 
 .bot-message {
   justify-content: flex-start;
-  background-color: rgba(241, 241, 241, 0.6);
+  background-color: rgba(177, 169, 169, 0.6);
   color: #333;
   text-align: left;
   border-radius: 12px 12px 12px 0;
