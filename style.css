@@ -748,7 +748,7 @@ footer {
 /* Option Buttons */
 .option {
   display: inline-block;
-  background-color: #007bff;
+  background-color: #799abe;
   color: white;
   padding: 8px 16px;
   border-radius: 5px;
@@ -765,7 +765,7 @@ footer {
   margin-top: 10px;
 }
 .option:hover {
-  background-color: #0056b3;
+  background-color: #4cc5c5;
 }
 
 .show-options-container {
@@ -776,7 +776,7 @@ footer {
 
 /* Style the "Show More Options" Button */
 .show-options {
-  background-color: #007bff;
+  background-color: #6f98c4;
   color: white;
   padding: 8px 16px;
   border-radius: 5px;
@@ -787,5 +787,5 @@ footer {
 }
 
 .show-options:hover {
-  background-color: #0056b3;
+  background-color: #43bedd;
 }
