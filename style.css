@@ -772,3 +772,48 @@ footer {
     font-size: 15px;
   }
 }
+
+/* Option Buttons */
+.option {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+}
+
+.options-container {
+  display: flex;
+  justify-content: center; /* Center the options horizontally */
+  flex-wrap: wrap; /* Allow options to wrap on small screens */
+  margin-top: 10px;
+}
+.option:hover {
+  background-color: #0056b3;
+}
+
+.show-options-container {
+  display: flex;
+  justify-content: center; /* Center the button horizontally */
+  margin-top: 10px;
+}
+
+/* Style the "Show More Options" Button */
+.show-options {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+  text-align: center; /* Center text inside the button */
+}
+
+.show-options:hover {
+  background-color: #0056b3;
+}

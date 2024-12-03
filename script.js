@@ -61,29 +61,50 @@ document.addEventListener("DOMContentLoaded", () => {
       ? `<img src="bot.jpg" alt="bot-icon" class="avatar">` 
       : `<img src="avatar.jpg" alt="user-icon" class="avatar">`;
 
-    if (sender === "bot") {
-      // Bot icon before the text
-      messageElement.innerHTML = `${icon} <span>${text}</span>`;
-    } else {
-      // User icon after the text
-      messageElement.innerHTML = `<span>${text}</span> ${icon}`;
-    }
-
+    messageElement.innerHTML = sender === "bot" ? `${icon} <span>${text}</span>` : `<span>${text}</span> ${icon}`;
+    
     chatBox.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;
   }
 
   // Show Options
   function showOptions(options) {
+    const optionsContainer = document.createElement("div");
+    optionsContainer.className = "options-container"; // Add the options container
+  
     options.forEach((option) => {
       const optionElement = document.createElement("button");
       optionElement.className = "option";
       optionElement.innerHTML = option;
       optionElement.addEventListener("click", () => handleOption(option));
-      chatBox.appendChild(optionElement);
+      optionsContainer.appendChild(optionElement);
     });
+  
+    chatBox.appendChild(optionsContainer); // Append the container to the chatbox
     chatBox.scrollTop = chatBox.scrollHeight;
   }
+
+  // Show Options Button
+  // Show Options Button
+function showOptionsButton() {
+  const showOptionsBtn = document.createElement("button");
+  showOptionsBtn.className = "show-options";
+  showOptionsBtn.innerHTML = "Show More Options";
+
+  const showOptionsBtnContainer = document.createElement("div");
+  showOptionsBtnContainer.className = "show-options-container"; // Add the container class
+
+  showOptionsBtnContainer.appendChild(showOptionsBtn); // Append button to container
+
+  showOptionsBtn.addEventListener("click", () => {
+    showOptions(messages.options);
+    showOptionsBtnContainer.remove(); // Remove the button after showing options
+  });
+
+  chatBox.appendChild(showOptionsBtnContainer); // Append the container to the chatbox
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
 
   // Handle Option Click
   function handleOption(option) {
@@ -91,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearOptions();
 
     if (option.toLowerCase() === "others") {
+      // Ask for name if "Others" is selected
       inputContainer.style.display = "flex";
       addMessage("bot", "Please provide your name:");
       inputField.placeholder = "Enter your name here";
@@ -98,40 +120,46 @@ document.addEventListener("DOMContentLoaded", () => {
       inputField.removeEventListener("keypress", handleInput);
       inputField.addEventListener("keypress", handleInput);
     } else {
-      inputContainer.style.display = "none"; // Hide input for other options
+      inputContainer.style.display = "none";
       setTimeout(() => addMessage("bot", `You selected: ${option}`), 500);
+      setTimeout(showOptionsButton, 1000); // Show the "Show Options" button after a selection
     }
   }
 
-  // Handle Input
+  // Handle Input (Name, Email, and Message)
   function handleInput(event) {
-    if (event.key === "Enter" && inputField.value.trim()) {
-      const userInput = inputField.value.trim();
-      inputField.value = ""; // Clear input field
+    if (event.key === "Enter" || event.target === sendMessageButton) {
+      if (inputField.value.trim()) {
+        const userInput = inputField.value.trim();
+        inputField.value = ""; // Clear input field
 
-      if (currentStep === "name") {
-        userName = userInput;
-        addMessage("user", userName);
-        addMessage("bot", "Thank you! Now, please provide your email address:");
-        inputField.placeholder = "Enter your email here";
-        currentStep = "email";
-      } else if (currentStep === "email") {
-        userEmail = userInput;
-        addMessage("user", userEmail);
-        addMessage("bot", "Great! Finally, please type your message:");
-        inputField.placeholder = "Enter your message here";
-        currentStep = "message";
-      } else if (currentStep === "message") {
-        userMessage = userInput;
-        addMessage("user", userMessage);
-        addMessage("bot", `Thank you, ${userName}! We've received your message and will get back to you at ${userEmail} soon.`);
-        inputContainer.style.display = "none";
-        currentStep = "name";
-        setTimeout(() => addMessage("bot", "Would you like to see the options again?"), 500);
-        setTimeout(() => showOptions(["Show Options"]), 1000);
+        if (currentStep === "name") {
+          userName = userInput;
+          addMessage("user", userName);
+          addMessage("bot", "Thank you! Now, please provide your email address:");
+          inputField.placeholder = "Enter your email here";
+          currentStep = "email";
+        } else if (currentStep === "email") {
+          userEmail = userInput;
+          addMessage("user", userEmail);
+          addMessage("bot", "Great! Finally, please type your message:");
+          inputField.placeholder = "Enter your message here";
+          currentStep = "message";
+        } else if (currentStep === "message") {
+          userMessage = userInput;
+          addMessage("user", userMessage);
+          addMessage("bot", `Thank you, ${userName}! We've received your message and will get back to you at ${userEmail} soon.`);
+          inputContainer.style.display = "none"; // Hide input container
+          currentStep = "name"; // Reset for next interaction
+          setTimeout(() => addMessage("bot", "Would you like to see the options again?"), 500);
+          setTimeout(showOptionsButton, 1000); // Show the "Show Options" button
+        }
       }
     }
   }
+
+  // Add Event Listener to "Send" button for sending message
+  sendMessageButton.addEventListener("click", handleInput);
 
   function clearOptions() {
     document.querySelectorAll(".option").forEach((el) => el.remove());
