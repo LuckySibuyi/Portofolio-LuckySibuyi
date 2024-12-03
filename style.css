@@ -673,106 +673,78 @@ footer {
   background: rgb(173, 135, 135);
   
 }
-@media (max-width: 425px) {
-  .toggle-button {
-    width: 50px;
-    height: 50px;
-    font-size: 18px;
-  }
-
-  .chatbot-container {
-    width: 100%;
-    bottom: 20px;
-    right: 0;
-    left: 0;
-  }
-
-  .chat {
-    padding: 8px;
-    background-size: cover;
-  }
-
-  .message {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .input-container {
-    flex-direction: column;
-    padding: 5px;
-  }
-
-  .input {
-    margin-bottom: 5px;
-    font-size: 14px;
-  }
-
-  .button {
-    font-size: 16px;
-  }
-}
-@media (max-width: 600px) {
-  .toggle-button {
-    width: 50px;
-    height: 50px;
-    font-size: 18px;
-  }
-
-  .chatbot-container {
-    width: 100%;
-    bottom: 20px;
-    right: 0;
-    left: 0;
-  }
-
-  .chat {
-    padding: 8px;
-    background-size: cover;
-  }
-
-  .message {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .input-container {
-    flex-direction: column;
-    padding: 5px;
-  }
-
-  .input {
-    margin-bottom: 5px;
-    font-size: 14px;
-  }
-
-  .button {
-    font-size: 16px;
-  }
-}
-
-/* Medium screens (tablets) */
 @media (max-width: 768px) {
-  .toggle-button {
-    width: 55px;
-    height: 55px;
-    font-size: 20px;
-    bottom: 40px;
-    right: 20px;
+  #chatbotContainer {
+    width: 60%;
+    max-width: 100%;
+    max-height: 80vh;
   }
 
-  .chatbot-container {
-    width: 400px;
+  #input {
+    width: 70%;
+    padding: 10px;
   }
 
-  .chat {
-    padding: 15px;
+  #button {
+    padding: 10px 20px;
   }
 
-  .input {
-    font-size: 15px;
+  .show-options {
+    padding: 10px 20px;
   }
 }
 
+@media (max-width: 480px) {
+  #chatbotContainer {
+    width: 100%;
+    max-width: 100%;
+    max-height: 90vh;
+  }
+
+  #input {
+    width: 60%;
+    font-size: 16px;
+  }
+
+  #button {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  .show-options {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  .option {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+/* For small mobile screens */
+@media (max-width: 320px) {
+  #chatbotContainer {
+    width: 100%;
+    max-width: 100%;
+    max-height: 80vh;
+  }
+
+  #input {
+    width: 55%;
+    font-size: 16px;
+  }
+
+  #button {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  .show-options {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}
 /* Option Buttons */
 .option {
   display: inline-block;
