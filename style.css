@@ -776,7 +776,7 @@ footer {
 
 /* Style the "Show More Options" Button */
 .show-options {
-  background-color: #6f98c4;
+  background-color: #c4b46f;
   color: white;
   padding: 8px 16px;
   border-radius: 5px;
@@ -788,4 +788,30 @@ footer {
 
 .show-options:hover {
   background-color: #43bedd;
+}
+.link-button-container {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.link-button {
+  padding: 10px 20px;
+  background-color: #0073b1; /* LinkedIn blue */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.link-button:hover {
+  background-color: #005580;
+}
+
+.link-button.github {
+  background-color: #333; /* GitHub dark theme */
+}
+
+.link-button.github:hover {
+  background-color: #000;
 }

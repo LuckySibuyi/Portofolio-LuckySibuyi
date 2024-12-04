@@ -81,15 +81,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function getOptionWithIcon(option) {
     switch (option.toLowerCase()) {
       case "skills":
-        return `<i class="fas fa-cogs"></i> Skills`;  // Gear icon for Skills
+        return `<i class="fas fa-cogs"></i> Skills`;  
       case "github":
-        return `<i class="fab fa-github"></i> Github`;  // GitHub icon
+        return `<i class="fab fa-github"></i> Github`; 
       case "linkedin":
-        return `<i class="fab fa-linkedin"></i> LinkedIn`;  // LinkedIn icon
+        return `<i class="fab fa-linkedin"></i> LinkedIn`;
+      case "resume":
+        return `<i class="fas fa-file-alt"></i> Resume`; 
+      case "leave a message":
+        return `<i class="fas fa-envelope"></i> Leave a Message`; 
       default:
-        return option;  // Default option text
+        return option; 
     }
   }
+  
 
   // Show Options Button
   function showOptionsButton() {
@@ -121,18 +126,19 @@ function handleOption(option) {
       addMessage("bot", "Here are some skills I have:<br>- JavaScript<br>- HTML & CSS<br>- React<br>- Node.js");
       break;
 
-    case "resume":
-      addMessage("bot", "You can view my resume [here](#).");
-      break;
+      case "resume":
+        addMessage("bot", "You can view or download my resume below:");
+        addLinkButton("Download Resume", "assets/resume.pdf");
+        break;
 
     case "github":
       addMessage("bot", "Here is my GitHub profile:");
-      addLinkButton("Visit GitHub", "https://github.com/yourprofile");
+      addLinkButton("Visit GitHub", "https://github.com/LuckySibuyi");
       break;
 
     case "linkedin":
       addMessage("bot", "Here is my LinkedIn profile:");
-      addLinkButton("Visit LinkedIn", "https://linkedin.com/in/yourprofile");
+      addLinkButton("Visit LinkedIn", "https://www.linkedin.com/in/lucky-sibuyi-414ab5221");
       break;
 
     case "leave a message":
@@ -165,7 +171,7 @@ function addLinkButton(label, url) {
   linkButton.className = "link-button";
   linkButton.innerHTML = label;
   linkButton.addEventListener("click", () => {
-    window.open(url, "_blank"); // Open link in a new tab
+    window.open(url, "_blank"); 
   });
 
   buttonContainer.appendChild(linkButton);
@@ -176,13 +182,13 @@ function addLinkButton(label, url) {
 
   // Handle Input (Name, Email, and Message)
   function handleInput(event) {
-    // Check if the event is a keypress or button click
+    
     if (event.type === "click" || (event.type === "keypress" && event.key === "Enter")) {
       const userInput = inputField.value.trim();
 
       if (userInput) {
-        inputField.value = ""; // Clear the input field
-        addMessage("user", userInput); // Display user input
+        inputField.value = "";
+        addMessage("user", userInput);
 
         if (currentStep === "name") {
           userName = userInput;
