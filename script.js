@@ -5,6 +5,7 @@ function toggleMenu() {
   icon.classList.toggle("open");
 }
 
+
 document.addEventListener("DOMContentLoaded", () => {
   const toggleButton = document.getElementById("toggleButton");
   const chatbotContainer = document.getElementById("chatbotContainer");
@@ -67,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     chatBox.scrollTop = chatBox.scrollHeight;
   }
 
-  // Show Options
+  // Show Options with Icons
   function showOptions(options) {
     const optionsContainer = document.createElement("div");
     optionsContainer.className = "options-container";
@@ -75,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     options.forEach((option) => {
       const optionElement = document.createElement("button");
       optionElement.className = "option";
-      optionElement.innerHTML = option;
+      optionElement.innerHTML = getOptionWithIcon(option);
       optionElement.addEventListener("click", () => handleOption(option));
       optionsContainer.appendChild(optionElement);
     });
@@ -83,6 +84,25 @@ document.addEventListener("DOMContentLoaded", () => {
     chatBox.appendChild(optionsContainer);
     chatBox.scrollTop = chatBox.scrollHeight;
   }
+
+  // Get Option with Icon
+  function getOptionWithIcon(option) {
+    switch (option.toLowerCase()) {
+      case "skills":
+        return `<i class="fas fa-cogs"></i> Skills`;  
+      case "github":
+        return `<i class="fab fa-github"></i> Github`; 
+      case "linkedin":
+        return `<i class="fab fa-linkedin"></i> LinkedIn`;
+      case "resume":
+        return `<i class="fas fa-file-alt"></i> Resume`; 
+      case "leave a message":
+        return `<i class="fas fa-envelope"></i> Leave a Message`; 
+      default:
+        return option; 
+    }
+  }
+  
 
   // Show Options Button
   function showOptionsButton() {
@@ -105,56 +125,78 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Handle Option Click
-  function handleOption(option) {
-    addMessage("user", option);
-    clearOptions();
-    switch (option.toLowerCase()) {
-      case "skills":
-        addMessage("bot", "Here are some skills I have:<br>- JavaScript<br>- HTML & CSS<br>- React<br>- Node.js");
-        break;
+  // Handle Option Click
+function handleOption(option) {
+  addMessage("user", option);
+  clearOptions();
+  switch (option.toLowerCase()) {
+    case "skills":
+      addMessage("bot", "Here are some skills I have:<br>- JavaScript<br>- HTML & CSS<br>- React<br>- Node.js");
+      break;
 
       case "resume":
-        addMessage("bot", "You can view my resume [here](#).");
+        addMessage("bot", "You can view or download my resume below:");
+        addLinkButton("Download Resume", "assets/resume.pdf");
         break;
 
-      case "github":
-        addMessage("bot", "Check out my GitHub profile [here](https://github.com/yourprofile).");
-        break;
+    case "github":
+      addMessage("bot", "Here is my GitHub profile:");
+      addLinkButton("Visit GitHub", "https://github.com/LuckySibuyi");
+      break;
 
-      case "linkedin":
-        addMessage("bot", "Visit my LinkedIn profile [here](https://linkedin.com/in/yourprofile).");
-        break;
+    case "linkedin":
+      addMessage("bot", "Here is my LinkedIn profile:");
+      addLinkButton("Visit LinkedIn", "https://www.linkedin.com/in/lucky-sibuyi-414ab5221");
+      break;
 
-      case "leave a message":
-        inputContainer.style.display = "flex";
-        addMessage("bot", "Please provide your name:");
-        inputField.placeholder = "Enter your name here";
-        inputField.focus();
-        inputField.removeEventListener("keypress", handleInput);
-        inputField.addEventListener("keypress", handleInput);
-        break;
+    case "leave a message":
+      inputContainer.style.display = "flex";
+      addMessage("bot", "Please provide your name:");
+      inputField.placeholder = "Enter your name here";
+      inputField.focus();
+      inputField.removeEventListener("keypress", handleInput);
+      inputField.addEventListener("keypress", handleInput);
+      break;
 
-      default:
-        addMessage("bot", "I'm not sure how to handle that. Please choose an option from the list.");
-        setTimeout(() => showOptions(messages.options), 1000);
-        break;
-    }
-
-    if (option.toLowerCase() !== "leave a message") {
-      inputContainer.style.display = "none";
-      setTimeout(showOptionsButton, 1000);
-    }
+    default:
+      addMessage("bot", "I'm not sure how to handle that. Please choose an option from the list.");
+      setTimeout(() => showOptions(messages.options), 1000);
+      break;
   }
+
+  if (option.toLowerCase() !== "leave a message") {
+    inputContainer.style.display = "none";
+    setTimeout(showOptionsButton, 1000);
+  }
+}
+
+// Add a button with a link
+function addLinkButton(label, url) {
+  const buttonContainer = document.createElement("div");
+  buttonContainer.className = "link-button-container";
+
+  const linkButton = document.createElement("button");
+  linkButton.className = "link-button";
+  linkButton.innerHTML = label;
+  linkButton.addEventListener("click", () => {
+    window.open(url, "_blank"); 
+  });
+
+  buttonContainer.appendChild(linkButton);
+  chatBox.appendChild(buttonContainer);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
 
   // Handle Input (Name, Email, and Message)
   function handleInput(event) {
-  
+    
     if (event.type === "click" || (event.type === "keypress" && event.key === "Enter")) {
       const userInput = inputField.value.trim();
 
       if (userInput) {
-        inputField.value = ""; 
-        addMessage("user", userInput); 
+        inputField.value = "";
+        addMessage("user", userInput);
 
         if (currentStep === "name") {
           userName = userInput;
@@ -163,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
           currentStep = "email";
 
         } else if (currentStep === "email") {
-         
+          // Validate email format
           const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
           if (emailPattern.test(userInput)) {
             userEmail = userInput;
@@ -171,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
             inputField.placeholder = "Enter your message here";
             currentStep = "message";
           } else {
-           
+            // Show error message for invalid email
             addMessage("bot", "That doesn't look like a valid email address. Please try again:");
             inputField.placeholder = "Enter a valid email here";
           }
@@ -179,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (currentStep === "message") {
           userMessage = userInput;
           addMessage("bot", `Thanks for your message, ${userName}. We'll reply to ${userEmail} soon.`);
-          inputContainer.style.display = "none"; 
+          inputContainer.style.display = "none"; // Hide the input container
           currentStep = "name";
           setTimeout(() => addMessage("bot", "Is there anything else I can assist you with?"), 500);
           setTimeout(showOptionsButton, 1000);
@@ -188,6 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Add Event Listener to "Send" button for sending message
   sendMessageButton.addEventListener("click", (event) => handleInput(event));
 
   function clearOptions() {
