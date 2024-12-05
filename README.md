@@ -1,5 +1,3 @@
-https://luckysibuyi.github.io/Portofolio-LuckySibuyi/
-
 # My Portfolio
 
 This project is for my personal professional portfolio.
