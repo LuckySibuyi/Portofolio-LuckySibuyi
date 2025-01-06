@@ -61,12 +61,30 @@ a:hover {
   text-underline-offset: 1rem;
   text-decoration-color: rgb(181, 181, 181);
 }
+
 .logo {
-  font-size: 2rem;
+  font-size: 3rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  background: linear-gradient(90deg, #3498db, #e74c3c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 0.5s ease-in-out;
+  background-size: 200%;
 }
 
 .logo:hover {
-  cursor: default;
+  background-position: right center;
+  cursor: pointer;
+}
+.logo a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.logo a:hover {
+  color: #3498db;
 }
 
 
