@@ -4,6 +4,45 @@ function toggleMenu() {
   menu.classList.toggle("open");
   icon.classList.toggle("open");
 }
+document.addEventListener('DOMContentLoaded', () => {
+  const textArray = [
+    "Web Developer",
+    "Tech enthusiast",
+    "Apps Developer"
+  ];
+  const typedTextElement = document.querySelector(".typed-text");
+  const typingDelay = 100;
+  const erasingDelay = 100;
+  const newTextDelay = 1500;
+  let textArrayIndex = 0;
+  let charIndex = 0;
+
+  function type() {
+    if (charIndex < textArray[textArrayIndex].length) {
+      typedTextElement.textContent += textArray[textArrayIndex].charAt(charIndex);
+      charIndex++;
+      setTimeout(type, typingDelay);
+    } else {
+      setTimeout(erase, newTextDelay);
+    }
+  }
+
+  function erase() {
+    if (charIndex > 0) {
+      typedTextElement.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
+      charIndex--;
+      setTimeout(erase, erasingDelay);
+    } else {
+      textArrayIndex = (textArrayIndex + 1) % textArray.length;
+      setTimeout(type, typingDelay + 500);
+    }
+  }
+
+  if (textArray.length) {
+    setTimeout(type, newTextDelay);
+  }
+});
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const toggleButton = document.getElementById("toggleButton");

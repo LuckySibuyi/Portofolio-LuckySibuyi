@@ -14,7 +14,9 @@
   </head>
   <body id="top">
     <nav id="desktop-nav">
-      <div class="logo">Lucky Sibuyi</div>
+      <div class="logo">
+  <a href="#top">Lucky Sibuyi</a>
+</div>
       <div>
         <ul class="nav-links">
           <li><a href="#about">About</a></li>
@@ -49,7 +51,10 @@
       <div class="section__text">
         <p class="section__text__p1">Hello, I'm</p>
         <h1 class="title">Lucky Sibuyi</h1>
-        <p class="section__text__p2">Graduate Developer</p>
+        <div class="typed-container">
+          <span class="typed-text"></span>
+          <span class="cursor"></span>
+        </div>
 
         <div class="btn-container">
           <button
@@ -81,7 +86,11 @@
     <hr style="width:50%;margin-left:25% ;">
     <section id="about">
       <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
+     
+      <div class="position-relative d-flex align-items-center justify-content-center">
+        <h1 class="display-1 text-uppercase text-white" style="-webkit-text-stroke: 1px #dee2e6;">About</h1>
+        <h1 class="position-absolute text-uppercase text-primary">About Me</h1>
+    </div>
       <div class="section-container">
         <div class="section__pic-container">
           <img
@@ -159,7 +168,19 @@
                   <p>Experienced</p>
                 </div>
               </article>
-              
+
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>Bootstrap</h3>
+                  <p>Experienced</p>
+                </div>
+              </article>
+
               <article>
                 <img
                   src="./assets/checkmark.png"
@@ -207,6 +228,30 @@
                   class="icon"
                 />
                 <div>
+                  <h3>C++</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
+                  <h3>C#</h3>
+                  <p>Intermediate</p>
+                </div>
+              </article>
+
+              <article>
+                <img
+                  src="./assets/checkmark.png"
+                  alt="Experience icon"
+                  class="icon"
+                />
+                <div>
                   <h3>Java</h3>
                   <p>Intermediate</p>
                 </div>
@@ -236,7 +281,7 @@
           <div class="details-container color-container">
             <div class="article-container">
               <img
-                src="./assets/project-1.png"
+                src="./assets/snip.png"
                 alt="Project 1"
                 class="project-img"
               />
@@ -244,25 +289,53 @@
             <h2 class="experience-sub-title project-title">Profile Demo</h2>
             <div class="btn-container">
               <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/LuckySibuyi/Demo/'"
-              >
-                Github
-              </button>
+                  class="btn btn-color-2 project-btn"
+                  onclick="window.open('https://github.com/LuckySibuyi/chatbot/', '_blank', 'noopener,noreferrer')"
+                >
+                  GitHub
+                </button>
+                <button
+                  class="btn btn-color-2 project-btn"
+                  onclick="window.open('https://luckysibuyi.github.io/chatbot/', '_blank', 'noopener,noreferrer')"
+                >
+                  Live Demo
+                </button>
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="./assets/project-1.png"
+                alt="Project 1"
+                class="project-img"
+                style="height: 180px; width: 210px;"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Profile Demo</h2>
+            <div class="btn-container">
               <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://luckysibuyi.github.io/Demo/'"
-              >
-                Live Demo
-              </button>
+                  class="btn btn-color-2 project-btn"
+                  onclick="window.open('https://github.com/LuckySibuyi/Demo/', '_blank', 'noopener,noreferrer')"
+                >
+                  GitHub
+                </button>
+                <button
+                  class="btn btn-color-2 project-btn"
+                  onclick="window.open('https://luckysibuyi.github.io/Demo/', '_blank', 'noopener,noreferrer')"
+                >
+                  Live Demo
+                </button>
             </div>
           </div>
           
-          
         </div>
-        
       </div>
-      
+      <img
+        src="./assets/arrow.png"
+        alt="Arrow icon"
+        class="icon arrow"
+        onclick="location.href='#contact'"
+      />
     </section>
     <section id="contact">
       <p class="section__text__p1">Get in Touch</p>
