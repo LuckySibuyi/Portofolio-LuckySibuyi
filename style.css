@@ -893,6 +893,7 @@ h1.text-primary {
   color: #74797c;
   display: inline-block;
   position: relative;
+  padding: 10px;
 }
 
 .typed-text {
