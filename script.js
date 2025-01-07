@@ -164,7 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Handle Option Click
-  // Handle Option Click
 function handleOption(option) {
   addMessage("user", option);
   clearOptions();
@@ -260,7 +259,7 @@ function addLinkButton(label, url) {
         } else if (currentStep === "message") {
           userMessage = userInput;
           addMessage("bot", `Thanks for your message, ${userName}. We'll reply to ${userEmail} soon.`);
-          inputContainer.style.display = "none"; // Hide the input container
+          inputContainer.style.display = "none";
           currentStep = "name";
           setTimeout(() => addMessage("bot", "Is there anything else I can assist you with?"), 500);
           setTimeout(showOptionsButton, 1000);
