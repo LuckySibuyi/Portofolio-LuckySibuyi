@@ -5,6 +5,9 @@ function toggleMenu() {
   icon.classList.toggle("open");
 }
 
+
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const toggleButton = document.getElementById("toggleButton");
   const chatbotContainer = document.getElementById("chatbotContainer");
