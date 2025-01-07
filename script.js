@@ -7,7 +7,6 @@ function toggleMenu() {
 
 document.addEventListener("DOMContentLoaded", () => {
 
-
   const textArray = [
     "Tech enthusiast",
     "Web Developer",
@@ -62,8 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const messages = {
     init: ["Hello<br />I am Jarvis<span class='emoji'>&#129302;</span>your assistant.", "How can I help you today?"],
-    options: ["Movies 🎥", "News 📰", "Shopping 🛍️", "Music 🎵", "Others"],
+    options: ["Skills", "Resume", "LinkedIn", "Github", "Leave a message"],
   };
+
 
   // Toggle Chatbot
   toggleButton.addEventListener("click", () => {
@@ -97,16 +97,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const messageElement = document.createElement("div");
     messageElement.className = sender === "bot" ? "bot-message" : "user-message";
 
-    const icon = sender === "bot" 
-      ? `<img src="bot.jpg" alt="bot-icon" class="avatar">` 
+    const icon = sender === "bot"
+      ? `<img src="bot.jpg" alt="bot-icon" class="avatar">`
       : `<img src="avatar.jpg" alt="user-icon" class="avatar">`;
 
     messageElement.innerHTML = sender === "bot" ? `${icon} <span>${text}</span>` : `<span>${text}</span> ${icon}`;
-    
+
     chatBox.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;
   }
+// Show Options with Icons
+function showOptions(options) {
+  const optionsContainer = document.createElement("div");
+  optionsContainer.className = "options-container"; 
 
+  options.forEach((option) => {
+    const optionElement = document.createElement("button");
+    optionElement.className = "option";
+    optionElement.innerHTML = getOptionWithIcon(option);
+    optionElement.addEventListener("click", () => handleOption(option));
+    optionsContainer.appendChild(optionElement);
+  });
+
+  chatBox.appendChild(optionsContainer);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
   // Show Options
   function showOptions(options) {
     const optionsContainer = document.createElement("div");
@@ -124,24 +139,25 @@ document.addEventListener("DOMContentLoaded", () => {
     chatBox.scrollTop = chatBox.scrollHeight;
   }
 
-function showOptionsButton() {
-  const showOptionsBtn = document.createElement("button");
-  showOptionsBtn.className = "show-options";
-  showOptionsBtn.innerHTML = "Show More Options";
-
-  const showOptionsBtnContainer = document.createElement("div");
-  showOptionsBtnContainer.className = "show-options-container";
-
-  showOptionsBtnContainer.appendChild(showOptionsBtn);
-
-  showOptionsBtn.addEventListener("click", () => {
-    showOptions(messages.options);
-    showOptionsBtnContainer.remove();
-  });
-
-  chatBox.appendChild(showOptionsBtnContainer);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
+  function showOptionsButton() {
+    const showOptionsBtn = document.createElement("button");
+    showOptionsBtn.className = "show-options";
+    showOptionsBtn.innerHTML = "Show More Options";
+  
+    const showOptionsBtnContainer = document.createElement("div");
+    showOptionsBtnContainer.className = "show-options-container";
+  
+    showOptionsBtnContainer.appendChild(showOptionsBtn);
+  
+    showOptionsBtn.addEventListener("click", () => {
+      showOptions(messages.options);
+      showOptionsBtnContainer.remove();
+    });
+  
+    chatBox.appendChild(showOptionsBtnContainer);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+  
 
 
   // Handle Option Click
