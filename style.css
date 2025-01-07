@@ -870,7 +870,7 @@ h1.display-1 {
 }
 
 h1.text-primary {
-  font-size: 3rem; /* Adjust size for layered text */
+  font-size: 3rem;
   font-weight: bold;
 }
 
@@ -925,7 +925,7 @@ h1.text-primary {
 
 .link-button {
   padding: 10px 20px;
-  background-color: #0073b1; /* LinkedIn blue */
+  background-color: #0073b1;
   color: white;
   border: none;
   border-radius: 5px;
@@ -938,7 +938,7 @@ h1.text-primary {
 }
 
 .link-button.github {
-  background-color: #333; /* GitHub dark theme */
+  background-color: #333; 
 }
 
 .link-button.github:hover {

@@ -12,7 +12,7 @@
   }
 }
 
-@media screen and (max-width: 786px) {
+@media screen and (max-width: 1200px) {
   #desktop-nav {
     display: none;
   }
@@ -105,3 +105,29 @@
     height: inherit;
   }
 }
+
+
+
+
+/* For small screens (mobile devices) */
+@media (max-width: 768px) {
+  .text-white, .position-absolute {
+    font-size: 5rem; 
+  }
+
+  .position-relative {
+    height: 200px; 
+  }
+}
+
+/* For very small screens (extra small devices) */
+@media (max-width: 480px) {
+  .text-white, .position-absolute {
+    font-size: 4rem; 
+  }
+
+  .position-relative {
+    height: 150px;  
+  }
+}
+

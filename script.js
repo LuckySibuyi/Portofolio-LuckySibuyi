@@ -9,16 +9,14 @@ function toggleMenu() {
 
 document.addEventListener('DOMContentLoaded', () => {
   const textArray = [
-    "Web Designer",
+    "Tech enthusiast",
     "Web Developer",
-    "Front End Developer",
-    "Apps Designer",
     "Apps Developer"
   ];
   const typedTextElement = document.querySelector(".typed-text");
-  const typingDelay = 150;
+  const typingDelay = 100;
   const erasingDelay = 100;
-  const newTextDelay = 2000;
+  const newTextDelay = 1500;
   let textArrayIndex = 0;
   let charIndex = 0;
 
