@@ -11,8 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const textArray = [
     "Tech enthusiast",
-    "Web Developer",
-    "Apps Developer"
+    "Software Developer",
+    "Enovator",
+    "Problem Solver"
   ];
   const typedTextElement = document.querySelector(".typed-text");
   const typingDelay = 100;
